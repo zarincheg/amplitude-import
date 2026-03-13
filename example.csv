@@ -1,0 +1,6 @@
+event_type,display_name,description,category,property_name,property_type,prop_description,is_required,enum_values
+user_signed_up,User Signed Up,Fired when a new user completes registration,Authentication,method,enum,Sign-up method used,true,email|google|apple
+user_signed_up,,,,,referral_code,string,Referral code if present,false,
+page_viewed,Page Viewed,Fired on every page view,Navigation,page_name,string,Name of the page viewed,true,
+page_viewed,,,,,previous_page,string,Name of the previous page,false,
+button_clicked,Button Clicked,Fired when any button is clicked,Engagement,,,,,

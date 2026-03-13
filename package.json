@@ -1,0 +1,37 @@
+{
+  "name": "amplitude-import",
+  "version": "0.1.0",
+  "description": "Interactive CLI tool to bulk-create Amplitude events and properties from CSV, and track test events",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "amplitude-import": "./dist/index.js",
+    "amplitude-import-debug": "./dist/debug.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsx src/index.tsx",
+    "debug": "tsx scripts/debug-api.ts",
+    "build": "tsup",
+    "prepare": "tsup",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "ink": "^5.2.0",
+    "ink-select-input": "^6.2.0",
+    "ink-spinner": "^5.0.0",
+    "ink-text-input": "^6.0.0",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/react": "^18.3.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
