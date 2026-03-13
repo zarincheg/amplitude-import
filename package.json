@@ -17,7 +17,6 @@
     "dev": "tsx src/index.tsx",
     "debug": "tsx scripts/debug-api.ts",
     "build": "tsup",
-    "prepare": "tsup",
     "start": "node dist/index.js"
   },
   "dependencies": {
