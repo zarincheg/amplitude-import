@@ -55,7 +55,11 @@ function MainMenu({ config, onSelect }) {
     /* @__PURE__ */ jsx2(Header, {}),
     /* @__PURE__ */ jsx2(Box2, { flexDirection: "column", marginBottom: 1, children: config ? /* @__PURE__ */ jsxs2(Fragment, { children: [
       /* @__PURE__ */ jsxs2(Box2, { gap: 2, children: [
-        /* @__PURE__ */ jsx2(Text2, { dimColor: true, children: "API Key" }),
+        /* @__PURE__ */ jsx2(Text2, { dimColor: true, children: "Project " }),
+        /* @__PURE__ */ jsx2(Text2, { children: config.projectName ?? /* @__PURE__ */ jsx2(Text2, { dimColor: true, children: "(not set)" }) })
+      ] }),
+      /* @__PURE__ */ jsxs2(Box2, { gap: 2, children: [
+        /* @__PURE__ */ jsx2(Text2, { dimColor: true, children: "API Key " }),
         /* @__PURE__ */ jsxs2(Text2, { children: [
           config.apiKey.slice(0, 6),
           "*".repeat(Math.max(0, config.apiKey.length - 6))
@@ -331,6 +335,21 @@ function SettingsScreen({ onBack }) {
       /* @__PURE__ */ jsx3(Text3, { dimColor: true, children: "\u2191\u2193 navigate \xB7 Enter select" })
     ] });
   }
+  if (view === "edit-projectName") {
+    return /* @__PURE__ */ jsx3(
+      EditField,
+      {
+        label: "Project Name",
+        current: config.projectName ?? "",
+        hint: "A label to identify which Amplitude project these credentials belong to",
+        onSave: (v) => {
+          save({ ...config, projectName: v });
+          setView("menu");
+        },
+        onBack: () => setView("menu")
+      }
+    );
+  }
   if (view === "edit-apiKey") {
     return /* @__PURE__ */ jsx3(EditField, { label: "API Key", current: config.apiKey, onSave: (v) => {
       save(resetConnectionStatus({ apiKey: v }));
@@ -388,6 +407,7 @@ function SettingsScreen({ onBack }) {
   }
   const status = config.connectionStatus;
   const menuItems = [
+    { label: `Edit Project Name    ${config.projectName ?? "(not set)"}`, value: "edit-projectName" },
     { label: `Edit API Key         ${config.apiKey ? config.apiKey.slice(0, 6) + "\u2026" : "(not set)"}`, value: "edit-apiKey" },
     { label: `Edit API Secret      ${config.apiSecret ? "\u2022".repeat(8) : "(not set)"}`, value: "edit-apiSecret" },
     { label: "Set Region           (sets both URLs)", value: "pick-region" },
@@ -399,6 +419,10 @@ function SettingsScreen({ onBack }) {
   return /* @__PURE__ */ jsxs3(Box3, { flexDirection: "column", children: [
     /* @__PURE__ */ jsx3(Header, { subtitle: "Settings" }),
     /* @__PURE__ */ jsxs3(Box3, { flexDirection: "column", marginBottom: 1, children: [
+      /* @__PURE__ */ jsxs3(Box3, { gap: 2, children: [
+        /* @__PURE__ */ jsx3(Text3, { dimColor: true, children: "Project     " }),
+        /* @__PURE__ */ jsx3(Text3, { children: config.projectName ?? /* @__PURE__ */ jsx3(Text3, { dimColor: true, children: "(not set)" }) })
+      ] }),
       /* @__PURE__ */ jsxs3(Box3, { gap: 2, children: [
         /* @__PURE__ */ jsx3(Text3, { dimColor: true, children: "Connection  " }),
         /* @__PURE__ */ jsxs3(Text3, { color: STATUS_COLOR2[status], children: [

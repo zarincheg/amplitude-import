@@ -39,7 +39,11 @@ export function MainMenu({ config, onSelect }: Props): React.ReactElement {
                 {config ? (
                     <>
                         <Box gap={2}>
-                            <Text dimColor>API Key</Text>
+                            <Text dimColor>Project </Text>
+                            <Text>{config.projectName ?? <Text dimColor>(not set)</Text>}</Text>
+                        </Box>
+                        <Box gap={2}>
+                            <Text dimColor>API Key </Text>
                             <Text>{config.apiKey.slice(0, 6)}{"*".repeat(Math.max(0, config.apiKey.length - 6))}</Text>
                         </Box>
                         <Box gap={2}>

@@ -13,6 +13,7 @@ type Props = {
 
 type View =
     | "menu"
+    | "edit-projectName"
     | "edit-apiKey"
     | "edit-apiSecret"
     | "edit-baseUrl"
@@ -115,6 +116,17 @@ export function SettingsScreen({ onBack }: Props): React.ReactElement {
     }
 
     // ── Field editors ─────────────────────────────────────────────────────────
+    if (view === "edit-projectName") {
+        return (
+            <EditField
+                label="Project Name"
+                current={config.projectName ?? ""}
+                hint="A label to identify which Amplitude project these credentials belong to"
+                onSave={(v) => { save({ ...config, projectName: v }); setView("menu") }}
+                onBack={() => setView("menu")}
+            />
+        )
+    }
     if (view === "edit-apiKey") {
         return <EditField label="API Key" current={config.apiKey} onSave={(v) => { save(resetConnectionStatus({ apiKey: v })); setView("menu") }} onBack={() => setView("menu")} />
     }
@@ -160,6 +172,7 @@ export function SettingsScreen({ onBack }: Props): React.ReactElement {
     // ── Main menu ─────────────────────────────────────────────────────────────
     const status = config.connectionStatus
     const menuItems = [
+        { label: `Edit Project Name    ${config.projectName ?? "(not set)"}`, value: "edit-projectName" },
         { label: `Edit API Key         ${config.apiKey ? config.apiKey.slice(0, 6) + "…" : "(not set)"}`, value: "edit-apiKey" },
         { label: `Edit API Secret      ${config.apiSecret ? "•".repeat(8) : "(not set)"}`, value: "edit-apiSecret" },
         { label: "Set Region           (sets both URLs)", value: "pick-region" },
@@ -173,6 +186,10 @@ export function SettingsScreen({ onBack }: Props): React.ReactElement {
         <Box flexDirection="column">
             <Header subtitle="Settings" />
             <Box flexDirection="column" marginBottom={1}>
+                <Box gap={2}>
+                    <Text dimColor>Project     </Text>
+                    <Text>{config.projectName ?? <Text dimColor>(not set)</Text>}</Text>
+                </Box>
                 <Box gap={2}>
                     <Text dimColor>Connection  </Text>
                     <Text color={STATUS_COLOR[status]}>

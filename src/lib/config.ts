@@ -7,6 +7,8 @@ export type ConnectionStatus = "ok" | "error" | "untested"
 export type Config = {
     apiKey: string
     apiSecret: string
+    /** Human-readable project name shown in the UI */
+    projectName?: string
     /** Taxonomy API base URL  e.g. https://amplitude.com */
     baseUrl: string
     /** HTTP Tracking API base URL  e.g. https://api2.amplitude.com */
